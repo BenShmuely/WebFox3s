@@ -12,14 +12,13 @@ namespace WebFox.Controllers
 
         // HttpCookie myCookie = new HttpCookie("Sensitive cookie");
 
-        public void Unsafe(HttpWebResponse response, HttpWebRequest request)
+        public void Unsafe(HttpResponse response, HttpRequest request)
         {
+            var options = new CookieOptions();
+            options.Path = "/";
+            options.Domain = "";
             var password = "p-12345678";// + RandomNumberGenerator.GetInt32(200000000, 2000000000);
-            var cookie = new Cookie("password",password);
-            cookie.Path = "/";
-            cookie.Domain = "";
-            cookie.Comment = "Cookie Description";
-            response.Cookies.Add(cookie);
+            response.Cookies.Append("password", password, options);
         }
     }
 }
